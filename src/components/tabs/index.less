@@ -1,6 +1,6 @@
 
 @selector: tabs;
-@subSelector: tabs_item;
+@subSelector: ~'@{selector}-item';
 
 @font-size: 12px;
 @font-color: #145681;
@@ -15,56 +15,74 @@
 @tab-card-bg: #f4f4f4;
 @tab-card-active-bg: #fcfcfc;
 
-@tabpanel-height: 28px;
-@tabpanel-gap: 10px;
-@tabpanel-padding: 20px;
+@tab-item-height: 28px;
+@tab-item-gap: 5px;
+@tab-item-padding: 20px;
 
 @disabled-color: #ccc;
 @hover-color: #0083ba;
 @hover-bg-color: #fcfcfc;
 
+@tile-accent-color: #0083ba;
+@tile-accent-width: 2px;
 
+@closable-size: 12px;
+@closable-pos: 2px;
+
+.border(@color, @width: @tab-border-width) {
+    border: @width solid @color;
+}
+.border-bottom(@color, @width: @tab-border-width) {
+    border-bottom: @width solid @color;
+}
+
+.tabs-item-basic {
+    position: relative;
+    display: inline-block;
+    line-height: @tab-item-height;
+    font-size: @font-size;
+    margin-right: @tab-item-gap;
+    color: @font-color;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 @tab-item-padding;
+    transition: .3s;
+    &.disabled {
+        color: @disabled-color !important;
+        cursor: not-allowed !important;
+        user-select: none;
+        pointer-events: none;
+    }
+    &:hover {
+        color: @hover-color;
+        background: @hover-bg-color;
+        .closable-wrapper {
+            background: #c2c2c2;
+            .closable {
+                color: #fff;
+            }
+        }
+    }
+}
 
 .@{selector} {
-
     width: @tab-width;
-    height: @tab-height;
     box-sizing: border-box;
-    position: relative;
-    &::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        border-bottom: @tab-border-width solid @tab-border-color;
-    }
-    .@{selector}-header {}
-
-    .@{subSelector} {
+    &-header {
         position: relative;
-        display: inline-block;
-        line-height: @tabpanel-height;
-        font-size: @font-size;
-        margin-right: @tabpanel-gap;
-        color: @font-color;
-        text-align: center;
-        cursor: pointer;
-        padding: 0 @tabpanel-padding;
-        &.disabled {
-            color: @disabled-color !important;
-            cursor: not-allowed !important;
-            user-select: none;
-            pointer-events: none;
-        }
-        &:hover {
-            color: @hover-color;
-            background: @hover-bg-color;
+        height: @tab-height;
+        margin-bottom: 10px;
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            .border-bottom(@tab-border-color);
         }
     }
 
-    .@{subSelector}-card {
-        .tabs_item;
-        border: @tab-border-width solid @tab-card-border-color;
+    &-item-card:extend(.tabs-item-basic all) {
+        .border(@tab-card-border-color);
         border-bottom-color: @tab-border-color;
         background-color: @tab-card-bg;
         &.active {
@@ -73,13 +91,32 @@
             color: @font-color-active;
         }
     }
-    .@{subSelector}-tile {
-        .tabs_item;
+    .@{subSelector}-tile:extend(.tabs-item-basic all) {
         &.active {
-            border-bottom: 2px solid #0083ba;
+            .border-bottom(@tile-accent-color, @tile-accent-width);
             color: @font-color-active;
         }
-       
+    }
+
+    .closable-wrapper {
+        box-sizing: border-box;
+        height: @closable-size;
+        width: @closable-size;
+        line-height: 1;
+        border-radius: 50%;
+        position: absolute;
+        top: @closable-pos;
+        right: @closable-pos;
+        text-align: center;
+        transition: .1s;
+        .closable {
+            transform: scale(.85);
+            display: inline-block;
+            line-height: 1;
+            font-size: @closable-size;
+            color: #cecece;
+            transition: .1s;
+        }
     }
 }
 
