@@ -12,6 +12,6 @@ subtitle: 加载
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | size | loading大小，可选值：`default` `small`| string | default |
-| type | loading样式（是否带背景层），可选值：`default` `layer`| string | default |
+| layer | 是否带背景层 | boolean | false |
 | tip | 自定义描述文案 | string | - |
 | delay | 延迟显示加载效果的时间（防止闪烁） | number (毫秒) | - |

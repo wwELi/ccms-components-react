@@ -19,18 +19,16 @@ export default class LoadingDemo extends React.Component {
     	}
 	
 	delayLoading = () => {
-		const {loading} = this.state;
 		this.setState({
-			loading: !loading
+			loading: !this.state.loading
 		})
 	}
 
 	render() {
-		const {loading} = this.state;
 		return (
 			<div>
-				<Button size="small" type="primary" onClick={this.delayLoading}>{loading ? '关闭延迟加载Loading' : '打开延迟加载Loading(1.5s)'}</Button>
-				{loading && <Loading delay={1500}/>}
+				<Button size="small" type="primary" onClick={this.delayLoading}>{this.state.loading ? '关闭延迟加载Loading' : '打开延迟加载Loading(1.5s)'}</Button>
+				{this.state.loading && <Loading delay={1500}/>}
 			</div>
 			
 		);

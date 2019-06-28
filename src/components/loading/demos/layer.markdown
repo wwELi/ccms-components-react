@@ -1,7 +1,7 @@
 ---
 order: 4
 title: 背景设置
-desc: 不配置type即为默认不带背景，设置为layer带背景
+desc: 不配置layer即为默认不带背景，layer=true带背景
 ---
 
 ````javascript
@@ -13,7 +13,7 @@ export default class LoadingDemo extends React.Component {
 	render() {
 		return (
 			<div className="item-type">
-				<Loading type="layer"/>
+				<Loading layer={true}/>
 			</div>
 			
 		);
