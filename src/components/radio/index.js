@@ -1,34 +1,33 @@
-import React, { Children, cloneElement, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import './index.less';
+import Selector from '../selector';
 
 const noop = () => {};
-const classSelector = 'radio';
 
 function Group(props) {
-
-	const { children, defaultValue, value, onChange, disabled, horizontal, vertical } = props;
+	const { value, onChange, className, defaultValue, horizontal, vertical, ...other } = props;
 	const [currentValue, setCurrentValue] = useState(defaultValue);
+
+	const isChecked = val => val === currentValue;
+	const onChangeAction = val => {
+		setCurrentValue(val);
+		onChange(val);
+	};
 
 	useEffect(() => {
 		setCurrentValue(value === undefined ? defaultValue : value);
 	}, [value]);
 
-	const radios = useMemo(() => Children.map(children, child => cloneElement(child, {
-		disabled,
-		checked: child.props.value === currentValue,
-		onChange(val, evt) {
-			setCurrentValue(val);
-			onChange(val, evt);
-		}
-	})), [currentValue, disabled]);
-
 	return (
-		<span className={classnames(`${classSelector}-group`, { horizontal, vertical })}>
-			{ radios }
-		</span>
+		<Selector.Group
+			{...other}
+			isChecked={isChecked}
+			onChange={onChangeAction}
+			className={classnames('radio-group', { horizontal, vertical }, className)}
+		/>
 	)
 }
 
@@ -67,31 +66,8 @@ class Radio extends React.Component {
 		return checked !== prevChecked || disabled !== prevDisabled;
 	}
 
-	onChangeAction(evt) {
-		const { value, onChange } = this.props;
-		onChange(value, evt);
-	}
-
 	render() {
-
-		const { checked, children, className = '', style, disabled, ...otherProps } = this.props;
-
-		return (
-			<label className={classnames(classSelector, className)} style={style}>
-				<span className={`${classSelector}-wrapper`}>
-					<input
-						{...otherProps}
-						type="radio"
-						checked={checked}
-						disabled={disabled}
-						className={`${classSelector}-input`}
-						onChange={this.onChangeAction.bind(this)}
-					/>
-					<span className={`${classSelector}-inner`}/>
-				</span>
-				<span className={classnames({ disabled })}>{ children }</span>
-			</label>
-		)
+		return <Selector type='radio' classSelector='radio' {...this.props}/>
 	}
 
 }

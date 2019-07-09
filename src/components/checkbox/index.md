@@ -21,7 +21,7 @@ subtitle: 多选按钮
 | checked | 当前checkbox是否选中 | boolean | false |
 | disabled | 当前checkbox是否禁用 | boolean | false |
 | indeterminate | 设置 indeterminate 状态，只负责样式控制 | boolean | false |
-| onChange | 当前checkbox onChange 回调函数  | function(evt:Event) | -- |
+| onChange | 当前checkbox onChange 回调函数  | function(value) | -- |
 
 ### API Checkbox.Card
 | 属性 | 说明 | 类型 | 默认值 |

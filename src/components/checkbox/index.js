@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import './index.less';
 import Group from './group';
-import CommonCheckbox from './checkbox';
+import Selector from '../selector';
 
 function Checkbox({ indeterminate, ...props }) {
 
@@ -12,7 +13,7 @@ function Checkbox({ indeterminate, ...props }) {
 		ref.current.indeterminate = indeterminate;
 	});
 
-	return <CommonCheckbox ref={ref} classSelector='checkbox' {...props} />
+	return <Selector type='checkbox' ref={ref} classSelector='checkbox' {...props} />
 }
 
 function Card(props) {
@@ -21,7 +22,7 @@ function Card(props) {
 	const getPx = px => Number.isNaN(Number(px)) ? px : `${px}px`;
 	const styles = { ...style, width: getPx(width), height: getPx(height) };
 
-	return <CommonCheckbox classSelector='checkbox-card' {...other} style={styles}/>
+	return <Selector type='checkbox' classSelector='checkbox-card' {...other} style={styles}/>
 }
 
 Checkbox.propTypes = {

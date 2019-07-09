@@ -1,0 +1,69 @@
+
+@selector: selector;
+
+@size: 14px;
+
+@normal-color: #CCC;
+@font-color: #333;
+@disabled-color: #DDD;
+@checked-color: #00AAF1;
+@disabled-bg-color: #EEE;
+@default-bg-color: #FFF;
+
+.@{selector} {
+
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+	margin-right: 8px;
+
+	cursor: pointer;
+	color: @font-color;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	&-input {
+		opacity: 0;
+		position: absolute;
+
+		&:hover + .@{selector}-inner {
+			color: @checked-color;
+		}
+
+		&:checked + .@{selector}-inner {
+			color: @checked-color;
+		}
+
+		&[type=checkbox]:indeterminate + .@{selector}-inner {
+			border: 1px solid @normal-color;
+			color: @checked-color;
+		}
+
+		&[type]:disabled + .@{selector}-inner
+		, &:disabled ~ .@{selector}-container {
+			color: @disabled-color;
+			cursor: not-allowed;
+		}
+
+		&[disabled]:not(:checked) + .@{selector}-inner {
+			background-color: @disabled-bg-color;
+		}
+
+		&[type=checkbox]:indeterminate + .@{selector}-inner {
+			background-color: @default-bg-color;
+		}
+
+	}
+
+	&-container {
+		padding: 0 5px;
+	}
+
+	&-inner {
+		color: @normal-color;
+		border: 1px solid currentColor;
+	}
+}

@@ -1,12 +1,6 @@
 
 @selector: radio;
 
-@normal-color: #666;
-@checked-color: #00AAF1;
-@disabled-color: #DDD;
-@radio-bg-color: #FFF;
-@radio-disabled-bg-color: #EEE;
-
 @radio-size: 14px;
 
 .position {
@@ -31,37 +25,15 @@
 
 .@{selector} {
 
-	display: inline-flex;
-	align-items: center;
-	margin-right: 8px;
-
-	cursor: pointer;
-	color: @normal-color;
-
-	&-wrapper {
-		position: relative;
-		width: @radio-size;
-		height: @radio-size;
-
-		margin-right: 5px;
-
-		&:hover {
-			color: @checked-color;
-		}
-	}
-
 	&-input {
-		opacity: 0;
-		cursor: pointer;
 
 		&:checked + .@{selector}-inner {
-			color: @checked-color;
 
 			&::after:extend(.position) {
 				content: '';
 				background-color: currentColor;
 
-				margin: 18%;
+				margin: 16%;
 
 				border: none;
 				box-shadow: 0 0 5px currentColor;
@@ -69,27 +41,15 @@
 				border-radius: 50%;
 			}
 		}
-
-		&:disabled, &:disabled + .@{selector}-inner {
-			.disabled;
-		}
-
-		&[disabled]:not(:checked) + .@{selector}-inner {
-			background-color: @radio-disabled-bg-color;
-		}
 	}
 
-	&-inner:extend(.position) {
-		z-index: -1;
+	&-inner {
+
+		position: relative;
+		width: @radio-size;
+		height: @radio-size;
 
 		border-radius: 50%;
-		border: 1px solid currentColor;
-		background-color: @radio-bg-color;
-	}
-
-	.disabled {
-		cursor: not-allowed;
-		color: @disabled-color;
 	}
 
 	@keyframes fadeIn {

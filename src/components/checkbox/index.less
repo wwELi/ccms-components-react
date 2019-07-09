@@ -6,16 +6,7 @@
 @border-radius-size: 3px;
 @card-min-size: 40px;
 
-@checked-color: #00AAF1;
-@normal-color: #CCC;
-@disabled-color: #DDD;
-@radio-disabled-bg-color: #EEE;
 @default-bg-color: #FFF;
-
-.common-input {
-	position: absolute;
-	opacity: 0;
-}
 
 .common-position {
 	position: absolute;
@@ -23,11 +14,6 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-}
-
-.common-disabled {
-	color: @disabled-color;
-	cursor: not-allowed;
 }
 
 .pseudo-mixin(@width, @height, @border) {
@@ -43,33 +29,20 @@
 
 .@{selector} {
 
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	cursor: pointer;
-
 	&-inner {
 
 		position: relative;
 
 		width: @checkbox-size;
 		height: @checkbox-size;
-
-		border: 1px solid currentColor;
 		border-radius: @border-radius-size;
-		box-sizing: border-box;
 
-		color: @normal-color;
 		display: inline-block;
 	}
 
 	&-input {
 
-		&:extend(.common-input);
-
 		&:indeterminate + .@{selector}-inner {
-			border: 1px solid @normal-color;
-			color: @checked-color;
 
 			&::after:extend(.common-position) {
 				content: '';
@@ -79,8 +52,6 @@
 		}
 
 		&:checked + .@{selector}-inner {
-
-			color: @checked-color;
 
 			&::after {
 
@@ -96,41 +67,22 @@
 				background-color: transparent;
 			}
 		}
-
-		&:hover + .@{selector}-inner {
-			color: @checked-color;
-		}
-
-		&:disabled + .@{selector}-inner, &:disabled ~ .@{selector}-container {
-			.common-disabled
-		}
-	}
-
-	&-container {
-		margin: 0 8px 0 5px;
 	}
 }
 
 .@{cardSelector} {
 
-	position: relative;
-	display: inline-flex;
 	min-height: @card-min-size;
 	min-width: @card-min-size;
-
-	box-sizing: border-box;
 	padding: 5px;
 
-	&-inner:extend(.common-position) {
-		color: @normal-color;
-		border: 1px solid currentColor;
-	}
+	&-inner:extend(.common-position){
+		background-color: @default-bg-color!important;
+	};
 
 	&-input {
-		&:extend(.common-input);
 
 		&:checked + .@{cardSelector}-inner {
-			color: @checked-color;
 
 			&::after {
 				.pseudo-mixin(10px, 5px, 2px solid @default-bg-color);
@@ -148,18 +100,6 @@
 				border-top-color: transparent;
 				border-left-color: transparent;
 			}
-		}
-
-		&:hover + .@{cardSelector}-inner {
-			color: @checked-color;
-		}
-
-		&:disabled + .@{cardSelector}-inner {
-			.common-disabled;
-		}
-
-		&:disabled ~ * {
-			.common-disabled;
 		}
 	}
 

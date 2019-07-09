@@ -19,9 +19,9 @@ export default function CheckboxDemo() {
 	return (
 		<>
 			<Checkbox.Group style={style} onChange={onChange}>
-        		<span><Checkbox value={'a'}>A</Checkbox></span>
-        		<Checkbox value={'b'}>B</Checkbox>
-        		<Checkbox value={'c'}>C</Checkbox>
+        		<span><Checkbox value={1}>A</Checkbox></span>
+        		<Checkbox value={2}>B</Checkbox>
+        		<Checkbox value={3}>C</Checkbox>
         	</Checkbox.Group>
         	<div />
 			<Checkbox.Group value={['c']} style={style}>

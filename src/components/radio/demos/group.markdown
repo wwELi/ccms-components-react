@@ -14,6 +14,7 @@ export default function RadioDemo() {
 	const [value, setValue] = useState();
 	
 	const onChange = value => {
+		console.log(value);
 		setValue(value);
 	};
 	

@@ -12,7 +12,7 @@ subtitle: 单选按钮
 | --- | --- | --- | --- |
 | defaultValue | 默认radio选中的值 | any | -- |
 | value | 设置当前选中的值 | any | -- |
-| onChange | 选中radio的回调函数 | function(value, evt:Event) | -- |
+| onChange | 选中radio的回调函数 | function(value) | -- |
 | disabled | 定义内部radio是否禁用 | boolean | false |
 | horizontal | 定义radio横向布局 | boolean | false |
 | vertical | 定义radio竖向布局 | boolean | false |
